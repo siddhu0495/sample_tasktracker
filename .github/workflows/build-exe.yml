@@ -1,0 +1,43 @@
+name: Build Windows app
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Build TaskTracker.exe
+        run: |
+          pip install pyinstaller==6.11.1
+          pyinstaller --noconfirm --onefile --windowed --name TaskTracker --add-data "tasktracker/web;tasktracker/web" TaskTracker.pyw
+      - name: Package
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force release | Out-Null
+          Copy-Item dist/TaskTracker.exe release/
+          Copy-Item "Start TaskTracker.bat" release/
+          Copy-Item README.md release/
+          Copy-Item -Recurse samples release/samples
+          Compress-Archive -Path release/* -DestinationPath TaskTracker-Windows.zip -Force
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TaskTracker-Windows
+          path: release/
+      - name: Publish release (tags only)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: TaskTracker-Windows.zip
