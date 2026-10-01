@@ -1,0 +1,6 @@
+Task,Priority,Status,Due Date,Owner,Labels,Account,Repeat,Notes
+Call Contoso about renewal,High,To Do,2026-10-02,Priya,Renewal;Call,Contoso,,Decision maker: CFO
+Send proposal to Fabrikam,Urgent,In Progress,2026-10-01,Arjun,Proposal,Fabrikam,,Include volume discount
+Update CRM pipeline,Normal,To Do,2026-10-05,Priya,Admin,Internal,weekly,
+Quarterly business review deck,High,In Review,2026-10-20,Meera,QBR,Northwind,,
+Submit expense report,Low,Done,2026-09-30,Arjun,Admin,Internal,monthly,

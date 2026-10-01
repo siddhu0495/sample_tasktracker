@@ -1,0 +1,6 @@
+# One task per line. Optional: !high  due 2026-10-08  weekly  [x]
+- Prepare Monday sales stand-up !high weekly due 2026-10-05
+- Follow up with 5 warm leads due tomorrow
+- [ ] Review discount approvals !urgent due today
+- [x] Book flights for customer visit
+- Clean up inbox
